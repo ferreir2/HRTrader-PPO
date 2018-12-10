@@ -535,8 +535,6 @@ if __name__ == '__main__':
     
     parser = argparse.ArgumentParser()
     parser.add_argument('runners_path', type='str', help='Path to file of pre-processed races.')
-    parser.add_argument('--pi_mlp_sizes', type=list, default=[128, 64, 64, 22], help='Policy mlp hidden layers sizes')
-    parser.add_argument('--vf_mlp_sizes', type=list, default=[50, 50, 50], help='Value function mlp hidden layers sizes')
     parser.add_argument('--pi_clip', type=float, default=0.2, help='Policy clip for PPO')
     parser.add_argument('--pi_lr', type=float, default=0.01, help='Initial learning rate')
     parser.add_argument('--bet_size', type=float, default=1, help='Bet size')
@@ -550,8 +548,11 @@ if __name__ == '__main__':
     print(args)
     
     # Init environment and agent
+    PI_MLP_SIZES = [32, 32, 32, 32]
+    VF_MLP_SIZES = [32, 32, 32, 32]
+    
     env = Env(args.runners_path)
-    agent = Agent(args.pi_mlp_sizes, args.vf_mlp_sizes)
+    agent = Agent(PI_MLP_SIZES, VF_MLP_SIZES)
 
     session_summary = []
 
